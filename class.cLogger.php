@@ -83,7 +83,7 @@ class cLogger{
         }
         $msg .= "\n";
         $this->putInBuffer($msg);
-        if ( $method == 1 ){
+        if ( $this->method == 1 ){
             return $this->writeToFile($msg);
         } else {
             return $this->writeToDatabase($msg);
@@ -109,7 +109,7 @@ class cLogger{
             $event .= $msg . "\n";
         }
         $this->transaction = array();
-        if ( $method == 1 ){
+        if ( $this->method == 1 ){
             return $this->writeToFile($event);
         } else {
             return $this->writeToDatabase($event);
