@@ -32,6 +32,7 @@ class cLogger{
         }
         if ( $bsize ){
             $this->bsize = (int)$bsize;
+        }
         return true;
     }
 
