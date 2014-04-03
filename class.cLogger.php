@@ -89,10 +89,11 @@ class cLogger{
         if ( $this->format == "string" ){
             //need to create the header
             if ( isset($_SERVER['REMOTE_ADDR']) ){
-                $event = "-- " . date("Y-m-d H:i:s") . " " . $_SERVER['REMOTE_ADDR'] . "\n";
+                $msg = "-- " . date("Y-m-d H:i:s") . " " . $_SERVER['REMOTE_ADDR'] . $msg;
             } else {
-                $event = "-- " . date("Y-m-d H:i:s") . "\n";
+                $msg = "-- " . date("Y-m-d H:i:s") . $msg;
             }
+            $msg .= "\n";
         } else {
             $msg = $this->bunyan($msg);
         }
