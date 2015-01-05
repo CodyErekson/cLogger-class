@@ -25,12 +25,12 @@ class cLogger{
     public $name = NULL; //application name -- only used for bunyan logging
     public $level = "30"; //logging detail -- used for bunyan logging
     /*
-        trace (60): logging from external libraries
-        debug (50): verbose debug information
-        info (40): detail on regular information
-        warn (30): something an operation should pay attention to
-        error (20): fatal for a request / action
-        fatal (10): the application exited because of some error
+        (10) trace: logging from external libraries
+        (20) debug: verbose debug information
+        (30) info: detail on regular information
+        (40) warn: something an operation should pay attention to
+        (50) error: fatal for a request / action
+        (60) fatal: the application exited because of some error
     */
 
     public function __construct($method='file', $bsize=false){
@@ -109,6 +109,18 @@ class cLogger{
         }
         $this->transaction = array();
         return true;
+    }
+    
+    //store the log message in the buffer
+    private function putInBuffer($msg){
+        if ( !is_array($this->buffer)){
+            return;
+        }
+        array_unshift($this->buffer, $msg);
+        while ( count($this->buffer) > $this->bsize ){
+            //while the buffer is bigger than the allowed size, remove the last one
+            $this->buffer = array_pop($this->buffer);
+        }
     }
     
         //inspect and "stringify" any objects or arrays passed in
